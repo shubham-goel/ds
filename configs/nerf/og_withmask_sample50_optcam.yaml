@@ -1,0 +1,12 @@
+defaults:
+  - og_withmask_sample50
+
+# Allow camera pose optimization
+optimize_cam: True
+optimize_R: True
+optimize_T: True
+optimize_Fov: True
+optimize_first: True
+
+# Cannot precache rays when optimizing cameras
+precache_rays: False

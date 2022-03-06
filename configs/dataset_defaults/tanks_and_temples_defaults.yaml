@@ -1,0 +1,6 @@
+# @package _global_
+
+# Original images are 1080x1920
+data:
+  num_views: 15
+  image_size: [306,544]

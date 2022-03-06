@@ -1,0 +1,10 @@
+defaults:
+  - base
+  - data: base
+  - data/source: google
+
+resume: True
+init_data_path: 'init_data.pickle'
+exp_name: idr_data
+
+out_dir: ${env:SHARED_HOME}/data/GSO_for_idr/  # EM + SIB

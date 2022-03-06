@@ -1,0 +1,74 @@
+defaults:
+  - viz: common
+  - override hydra/hydra_logging: colorlog
+  - override hydra/launcher: myslurm
+
+random_seed: 0
+
+# These provide hooks that can be overriden to resume old training runs
+id_name: ${hydra.job.config_name}
+id: ${id_name}__${hydra.job.override_dirname}
+id_suffix: r${data.cam_noise.std_rot}t${data.cam_noise.std_trans}h${data.cam_noise.std_hfov}/v${data.num_views}/${data.source.asin}
+id_suffix_visdom: r${data.cam_noise.std_rot}t${data.cam_noise.std_trans}h${data.cam_noise.std_hfov}_v${data.num_views}_${data.source.asin}
+exp_name: exp${now:%Y-%m-%d__%H-%M-%S}
+id_full: ${exp_name}__${id}
+
+# Hydra configs for run/sweep directories
+hydra:
+  run:
+    dir: ${hydra:runtime.cwd}/outputs/${id_full}/${id_suffix}
+  sweep:
+    dir: ${hydra:runtime.cwd}/outputs/sweep/${id_full}
+    subdir: ${hydra.run.dir}
+
+  job:
+    config:
+      # configuration for the ${hydra.job.override_dirname} runtime variable
+      override_dirname:
+        exclude_keys:
+          # data options covered in id_suffix
+          - data.source.root_dir
+          - data.source.asin
+          - data.num_views
+          - data.cam_noise.std_rot
+          - data.cam_noise.std_hfov
+          - data.cam_noise.std_trans
+          - data.source.mask_coco_category    # Not covered in suffix but helps keeps experiment directories clean (.../r0t0h0/v0/asin)
+          - data.source.colmap_sfm_log        # Not covered in suffix but helps keeps experiment directories clean (.../r0t0h0/v0/asin)
+          - data.source.images_dir            # Not covered in suffix but helps keeps experiment directories clean (.../r0t0h0/v0/asin)
+          - data.source.detectron2_repo_path  # Not covered in suffix but helps keeps experiment directories clean (.../r0t0h0/v0/asin)
+
+          # Irrelevant checkpointing/visualization things
+          - cammetric_wrt_cam0
+          - benchmark_fast
+          - debug
+          - resume
+          - checkpoint_path
+          - mesh_checkpoint_path
+          - checkpoint_iter_interval
+          - checkpoint_each_iter
+          - train.resume
+          - train.checkpoint_path
+          - train.checkpoint_iter_interval
+          - viz.server
+          - viz.port
+          - viz.env
+          - viz.history_size
+          - viz.iprint
+          - viz.idisplay
+          - viz.ishape
+          - viz.i360
+          - viz.i360_num_frames
+          - optim.num_iter
+          - num_iter
+
+          # Hooks
+          - id_name
+          - id_name_job
+          - id
+          - id_job
+          - id_suffix
+          - id_suffix_visdom
+          - id_datetime
+          - id_full
+          - exp_name

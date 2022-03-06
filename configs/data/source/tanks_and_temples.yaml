@@ -1,0 +1,22 @@
+type: tanks_and_temples
+asin: Barn
+base_dir: ${env:SHARED_HOME}/data/tankandtemples/
+
+# Save/load masks from masks directory (not provided by tanks and temples)
+mask_generator: render
+mask_coco_category: ???             # Used only when mask_generator=pointrend
+# masks_dir: /private/home/shubhamgoel/data/tanks_and_temples/masks/${data.source.asin}/
+masks_dir: ${data.source.base_dir}/masks/${data.source.asin}/
+render_masks_downsample_factor: 1   # render masks by downsampling if they're not available in masks_dir
+target_mesh_radius: 0.1             # Rescale entire scene s.t. GT mesh has this radius
+
+# video_file: ${data.source.base_dir}/videos/${data.source.asin}.mp4
+# images_dir: ${data.source.base_dir}/image_sets/${data.source.asin}/             # images are 1080x1920
+video_file: null
+images_dir: ${data.source.base_dir}/training_input/${data.source.asin}/images/    # images are 1080x1920
+training_data_dir: ${data.source.base_dir}/trainingdata/${data.source.asin}/
+
+gt_ply: ${data.source.training_data_dir}/${data.source.asin}.ply
+colmap_ply: ${data.source.training_data_dir}/${data.source.asin}_COLMAP.ply
+colmap_sfm_log: ${data.source.training_data_dir}/${data.source.asin}_COLMAP_SfM.log
+colmap2gt_trans: ${data.source.training_data_dir}/${data.source.asin}_trans.txt

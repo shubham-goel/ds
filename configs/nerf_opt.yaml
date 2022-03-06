@@ -1,0 +1,4 @@
+defaults:
+  - nerf_nomask
+  - optional dataset_defaults: ${data/source}_defaults
+  - override nerf@train: og_withmask_sample50_optcam

@@ -1,0 +1,28 @@
+defaults:
+  - base
+  - data: base
+  - data/source: google
+
+# Using hihg res data without camera pose noise
+data:
+  source:
+    mask_generator: null
+  cam_noise:
+    std_rot: 0
+  image_size: [2048,2048]
+
+# Colmap settings
+use_gt_cameras: True
+mapper_args: [--Mapper.tri_ignore_two_view_tracks, 0]
+camera_model: PINHOLE
+
+# Paths and stuff
+resume: True
+init_data_path: 'init_data.pickle'
+frames_dir: frames
+working_dir: colmap_work
+
+# TODO: Set these paths before using
+colmap_path: /usr/local/bin/colmap
+colmap_envs:
+  LD_LIBRARY_PATH: '/usr/lib/x86_64-linux-gnu:/public/apps/cuda/9.2/lib64:/usr/lib/colmap_libs'

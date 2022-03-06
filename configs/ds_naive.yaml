@@ -1,0 +1,4 @@
+defaults:
+  - ds_common
+  - override texture_model: optUV
+  - optional dataset_defaults: ${data/source}_defaults

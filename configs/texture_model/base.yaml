@@ -1,0 +1,47 @@
+optimize_cam: True
+optimize_R: True
+param_R_axis_angle: True
+optimize_T: True
+optimize_Fov: True
+optimize_first: True
+optimize_shape: True
+
+raster:
+  blur_radius: 5.e-5
+  faces_per_pixel: 6
+  bin_size:  null   # this setting controls whether naive or
+                    #  coarse-to-fine rasterization is used
+  max_faces_per_bin :  null  # this setting is for coarse rasterization
+  perspective_correct: False
+  clip_barycentric_coords: null
+  cull_backfaces: False
+  z_clip_value: null
+  cull_to_frustum: False
+
+shader:
+  _target_: null
+  blend_params:
+    _target_: pytorch3d.renderer.BlendParams
+    sigma: ${texture_model.raster.blur_radius}
+    gamma: 1.e-4
+    background_color: 1
+
+loss:
+  tex_mask: bool0.1   # Options: none, own, bool<float>, sharebool<float>
+
+  bidt_K: 1           # number of KNN to average over
+  bidt_margin_pix: 2  # distance margin in pixels. margin = 2*margin_pix/min(H,W)
+  bidt_maxdist: 0.2   # max-clamp distances
+
+  edgeloss_target: mean_init                # Options: zero, mean_init
+  edgeloss_multiplier: edge_-2              # Options: float, 'edge_<pow>'
+  laplacian_method: cotcurv-voronoi-stable  # Laplacian loss (which penalizes curvature) scales with object size
+  laplacian_multiplier: size_1              # Options: float, 'size_<pow>'
+
+  wt:
+    laplacian: 0.002
+    edge: 0.01
+    texL1: 1
+    texLpips: 0.02
+    mask: 1
+    maskbidt: 10

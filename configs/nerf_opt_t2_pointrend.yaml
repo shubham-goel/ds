@@ -1,0 +1,15 @@
+defaults:
+  - nerf_nomask
+  - optional dataset_defaults: ${data/source}_defaults
+  - override nerf@train: og_withmask_sample50_optcam
+  - override data/source: tanks_and_temples
+
+### config for running tanks_and_temples scenes without GT pointcloud using pointrend+maskrcnn masks
+data:
+  source:
+    # Changed data/source: tanks_and_temples
+    mask_generator: pointrend
+    mask_coco_category: ???
+    detectron2_repo_path: ${hydra:runtime.cwd}/src/external/detectron2/
+    mask_debug: False
+    mask_area_threshold: 0.002

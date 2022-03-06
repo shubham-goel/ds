@@ -1,0 +1,62 @@
+defaults:
+  - base
+  - data: base
+  - data/source: google
+  - texture_model: ???
+  - optim: sgd
+  - lr_scheduler: cosine
+
+# Logging frequency
+viz:
+  iprint: 20      # Print every N iterations
+  idisplay: 100
+  ishape: 100
+  i360: 2000
+  i360_num_frames: 36
+
+# Checkpointing and debugging configs
+benchmark_fast: True    # Turns off a lot of debugging visualizations etc.
+debug: False            # Turns on autograd anomaly detection
+resume: True
+checkpoint_iter_interval: 50
+checkpoint_each_iter: True      # Copy saved checkpoint to {iter}_checkpoint_path
+cammetric_wrt_cam0: True        # Camera metrics computed during training are wrt. cam0
+
+# Specify where to pick initial shape from (if it exists)
+checkpoint_path:      fit_instance_checkpoint.pth
+mesh_checkpoint_path: fit_instance_mesh_checkpoint.obj
+init_data_path:       init_data.pickle
+
+# Training hyperparameters
+num_iter: 50000
+grad_norm_clip: 1
+warmup_shape_iter: 500  # only optimize shape using mask-loss for first few iterations
+
+# Decay schedule for both raster.blur_radius and shader.gamma
+blur_radius_schedule:
+  decay: 'exp'
+  min: 1e-6
+sigma_schedule:
+  decay: 'exp'
+  min: 1e-6
+
+# reinitialize base mesh by subdividing at intermediate iterations
+# When a subdivision and space-carving are both requested at same iter, subdivision happens first
+init_shape:
+  level: 2
+int_subdivide_iters: [100, 300]
+
+# reinitialize base mesh at intermediate iterations by
+# voxelizing and removing voxels that project onto mask=0 area. Then remeshing.
+int_remesh:
+  iters: [10000,20000,30000]
+  type: voxelize
+  voxelizer: BINVOX
+  decimate: True     # decimate mesh to original number of faces before returning
+  res: 256           # voxelization resolution
+  pad: 0.1
+  thresh: 0.5
+  voxel_postprocessing: [dilate1,close1,minisland20]
+  smooth: True
+  smooth_kwargs:
+    method: 'constrained'

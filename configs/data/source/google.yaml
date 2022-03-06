@@ -1,0 +1,10 @@
+type: google
+version: '1'
+root_dir: ${env:SHARED_HOME}/.ignition/fuel/fuel.ignitionrobotics.org/GoogleResearch/directdl/ # EM + Sib
+
+asin: Sonny_School_Bus
+metadata_path: ${data.source.root_dir}/${data.source.asin}/${data.source.version}/renders_env/transforms.json
+val_start: 25
+num_val: 25
+
+target_mesh_radius: 0.1   # Rescale entire scene s.t. GT mesh has this radius

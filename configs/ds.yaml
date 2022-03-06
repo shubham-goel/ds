@@ -1,0 +1,4 @@
+defaults:
+  - ds_common
+  - optional dataset_defaults: ${data/source}_defaults
+  - override texture_model: transfer

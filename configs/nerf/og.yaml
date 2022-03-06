@@ -1,0 +1,50 @@
+# Configuration for OG NeRF training
+cammetric_wrt_cam0: True
+benchmark_fast: False           # Turns off a lot of debugging visualizations etc.
+resume: True
+checkpoint_path: 'nerf_exp_checkpoint.pth'  # For both loading/saving
+checkpoint_iter_interval: 1000
+checkpoint_each_iter: True      # Copy saved checkpoint to {iter}_checkpoint_path
+
+optimize_cam: False
+optimize_R: True
+param_R_axis_angle: True
+optimize_T: True
+optimize_Fov: True
+optimize_first: True
+set_img_bg_black: False
+
+precache_rays: True
+use_single_network: False
+chunk_size_test: 5000
+raysampler:
+  n_pts_per_ray: 64
+  n_rays_per_image: 1024
+  stratified: True
+  stratified_test: False
+  sample_frac_inside_mask: -1
+  n_pts_per_ray_fine: 64
+implicit_function:
+  _target_: src.nerfPy3D.NeuralRadianceField
+  n_harmonic_functions_xyz: 10
+  n_harmonic_functions_dir: 4
+  n_hidden_neurons_xyz: 256
+  n_hidden_neurons_dir: 128
+  n_layers_xyz: 8
+  density_noise_std: 0.0
+optim:
+  lr: 0.0005
+  eps: 0.0000001 # 1e-7 to match TensorFlow
+  num_iter: 500000
+  lr_scheduler_step_size: 500000
+  lr_scheduler_gamma: 0.1
+mask_loss:
+  _target_: torch.nn.functional.mse_loss
+  # _target_: torch.nn.functional.l1_loss
+  # _target_: torch.nn.functional.smooth_l1_loss
+  # beta: 0.1
+mask_loss_wt: 0
+rgb_loss_wt: 1
+shape:
+  voxel_res: 256
+  voxel_thresh: 50

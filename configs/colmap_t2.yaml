@@ -1,0 +1,5 @@
+defaults:
+  - colmap
+
+data:
+  image_size: [1080,1920]

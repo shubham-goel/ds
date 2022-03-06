@@ -1,0 +1,13 @@
+*.DS_Store
+*.out
+*.zip
+
+binvox
+
+.vscode/
+hdris/
+outputs/
+models/
+viz/
+example_data/
+results/

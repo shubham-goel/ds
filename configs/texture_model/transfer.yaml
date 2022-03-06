@@ -1,0 +1,16 @@
+defaults:
+  - base
+
+_target_: src.exp.ds.TexTransfer
+shader:
+  _target_: src.nnutils.render.TextureSampleShader
+
+  texture_sampler:
+    # vis_gamma is used only for extimating visibility. Intermediate depth
+    # maps rendered for estimating visibilty are rendered using this as gamma
+    vis_gamma: 1.e-4    # pr = softmax(delta_z/vis_gamma).
+    cos_gamma: 0.1      # pr = softmax(normal_z/cos_gamma)
+
+    # weight thresholds. weights lower than these are set to zero
+    vis_thresh: 0.1
+    weight_thresh: 1.e-6

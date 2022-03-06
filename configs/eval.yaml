@@ -1,0 +1,35 @@
+defaults:
+  - base
+  - override hydra/launcher: myslurm
+
+exp_name: eval
+# outputs_dir: ${env:SHARED_HOME}/checkpoint/outputs/3dify/
+outputs_dir: ${hydra:runtime.cwd}/outputs/
+exp_path: demo__ds__data/source=demo/r30t0h0/v12/
+asin: eagle
+exp_dir: ${outputs_dir}/${exp_path}/${asin}
+out_dir: ${hydra:runtime.cwd}/viz/
+
+# Hydra configs for run/sweep directories
+hydra:
+  run:
+    dir: ${hydra:runtime.cwd}/outputs/${exp_name}/${asin}
+  sweep:
+    dir: ${hydra:runtime.cwd}/outputs/sweep/${exp_name}/${asin}
+    subdir: ${hydra.run.dir}
+
+iter: latest
+align: False  # Set true for synthetic instances
+best: False
+
+viz:
+  env: eval/${asin}/${exp_name}
+
+# Other scripts using this config
+views: 8
+noise: 20
+r_noises: [10,20,30]
+all_num_views: [4,6,8,12]
+recompute_ours: False
+recompute_nerf: False
+align_fine: icp

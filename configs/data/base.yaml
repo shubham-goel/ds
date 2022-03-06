@@ -1,0 +1,13 @@
+source: ???
+
+# https://pytorch.org/docs/stable/generated/torch.Generator.html#torch.Generator.manual_seed
+# Pytorch recommends having equal number of 0/1 bits in seed.
+random_seed: 12297829382473034410   # 0xaaaa_aaaa_aaaa_aaaa
+
+image_size: [400,400]
+num_views: 15
+cam_noise:
+  skip_first: True  # Don't add noise to first camera, grounds coordinate frame.
+  std_hfov: 0   # in degrees
+  std_rot: 0    # in degrees
+  std_trans: 0  # in world units

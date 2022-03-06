@@ -1,0 +1,8 @@
+defaults:
+  - og
+
+# Masks are also available
+raysampler:
+    sample_frac_inside_mask: 0.5      # Sample 50% points inside mask
+rgb_loss_wt: 1
+mask_loss_wt: 0.5

@@ -1,0 +1,6 @@
+type: demo
+asin: eagle   # unique object identifier
+images_dir: ${hydra:runtime.cwd}/example_data/${data.source.asin}/  # directory containing images
+metadata_path: ${data.source.images_dir}/transforms.json            # contains camera poses
+
+target_mesh_radius: 0.1   # Rescale entire scene s.t. GT mesh has this radius

@@ -1,0 +1,20 @@
+defaults:
+  - base
+  - data: base
+  - data/source: google
+  - nerf@train: og
+
+train:
+  benchmark_fast: True
+  optim:
+    num_iter: 250001
+
+data:
+  image_size: [400,400]
+
+# Save data to pickle. Useful for evaluation
+init_data_path: 'init_data.pickle'
+
+viz:
+  i360: 50000
+  i360_num_frames: 24

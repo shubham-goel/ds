@@ -1,0 +1,11 @@
+defaults:
+  - ds_common
+  - override texture_model: transfer
+  - optional dataset_defaults: ${data/source}_defaults
+
+### Additionally, set texL1, texLpips = 0
+texture_model:
+  loss:
+    wt:
+      texL1: 0
+      texLpips: 0

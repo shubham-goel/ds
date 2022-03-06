@@ -1,0 +1,8 @@
+# @package _global_
+# # Don't optimize first camera
+# texture_model:
+#   optimize_first: False
+
+# Use 10 views by default
+data:
+  num_views: 10

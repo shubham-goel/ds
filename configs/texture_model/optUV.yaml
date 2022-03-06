@@ -1,0 +1,8 @@
+defaults:
+  - base
+
+_target_: src.exp.ds.TexOptUV
+teximg_size: 1024
+
+shader:
+  _target_: src.nnutils.render.SimpleTextureShader_RGBA_pxy
