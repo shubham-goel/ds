@@ -1,0 +1,9 @@
+server: null
+port: 6009
+env: ${exp_name}_${id_suffix_visdom}         # visdom env
+history_size: 10
+iprint: 100
+idisplay: 1000
+ishape: 2001
+i360: 5000
+i360_num_frames: 12

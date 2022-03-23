@@ -5,9 +5,11 @@
 binvox
 
 .vscode/
-hdris/
-outputs/
-models/
-viz/
-example_data/
-results/
+
+# Absolute paths to exclude
+/hdris/
+/outputs/
+/models/
+/viz/
+/example_data/
+/results/
