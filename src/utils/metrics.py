@@ -68,6 +68,8 @@ def compare_cameras(pred_cameras: CamerasBase, gt_cameras: CamerasBase,
     pred_fov = 1/torch.atan(pred_cameras.focal_length) * 180 / np.pi
     gt_fov = 1/torch.atan(gt_cameras.focal_length) * 180 / np.pi
     fov_l1 = F.l1_loss(pred_fov, gt_fov, reduction='none')
+    if fov_l1.dim() == 2:
+        fov_l1= fov_l1.mean(axis=1)
     cam_metrics.update(loss_tensor_to_dict(fov_l1, prefix='fov/'))
 
     return cam_metrics
