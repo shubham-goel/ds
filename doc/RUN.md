@@ -1,7 +1,7 @@
 This document describes how to run DS on different datasets.
 ## Demo data
 ### Running on custom data
-You may run DS on custom data. Download the sample data from [here]([https://people.eecs.berkeley.edu/~shubham-goel/projects/ds/example_data.zip](https://drive.google.com/file/d/11JAxKMXl4MM6K4POjAZIeEbb7fq2iib7/view?usp=drive_link)) and unzip it. This should create `example_data` in the root DS directory. The structure of this data is discussed later. Now run DS on this data: you should specify number of views to use for training, and may optionally add noise to the camera extrinsics.
+You may run DS on custom data. Download the sample data from [here](https://drive.google.com/file/d/11JAxKMXl4MM6K4POjAZIeEbb7fq2iib7/view?usp=drive_link) and unzip it. This should create `example_data` in the root DS directory. The structure of this data is discussed later. Now run DS on this data: you should specify number of views to use for training, and may optionally add noise to the camera extrinsics.
 ```bash
 python -m src.exp.ds --config-name=ds \
 data/source=demo data.source.asin=eagle \
@@ -10,7 +10,7 @@ exp_name=demo
 ```
 
 ### Visualizing a pretrained model
-Download a pretrained DS model from [here]([https://people.eecs.berkeley.edu/~shubham-goel/projects/ds/models.zip](https://drive.google.com/file/d/1jgDMum_5IRIY0f3NN7h6C9ORTu9JWG8K/view?usp=drive_link)) and unzip it to `models/`. We can now extract the mesh, and visualize novel views using the evaluation class in [src/eval/evaluate_ds.py](../src/eval/evaluate_ds.py). For example, the following script extracts visualizations to the `viz/` directory.
+Download a pretrained DS model from [here](https://drive.google.com/file/d/1jgDMum_5IRIY0f3NN7h6C9ORTu9JWG8K/view?usp=drive_link) and unzip it to `models/`. We can now extract the mesh, and visualize novel views using the evaluation class in [src/eval/evaluate_ds.py](../src/eval/evaluate_ds.py). For example, the following script extracts visualizations to the `viz/` directory.
 ```bash
 python -m src.eval.evaluate_ds asin=eagle exp_dir='models/eagle/' out_dir='viz/'
 ```
